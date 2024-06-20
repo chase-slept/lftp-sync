@@ -16,7 +16,7 @@ This goal of this project is to document the LFTP script that transfers media fi
 
 ## LFTP Script
 
-The script itself is pretty straight forward. The main component is a single line:
+The script itself is pretty straight forward and runs from the remote server. The main component is a single line:
 
 ```bash
 lftp sftp://${HOST}/ -e 'set sftp:auto-confirm yes; mirror -v --parallel=1 --use-pget-n=2 --continue --only-missing --Remove-source-files   /mnt/data/sync/  /home/slept/media/; quit'
@@ -28,7 +28,7 @@ We'll add the script to our system's crontab with `crontab -e`. I set it to run 
 
 ## Jump Host
 
-In order to secure the path to our local servers, we use a Jump Host to connect back home. This is configured in the SSH config file, which I've sanitized below:
+In order to secure the path to our local servers, we use an SSH Jump Host to connect back home. This is configured in the SSH config file on our remote server, which I've sanitized below:
 
 ```
 Host vps
